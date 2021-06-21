@@ -39,16 +39,14 @@ qps:18.41w
 
 
 # 项目运行方式 
-```C++
-
-```
+运行KV存储引擎
 
 ```
 make            // complie demo main.cpp
 ./bin/main      // run 
 ```
 
-Test performance data 
+测试存储引擎性能 
 
 ```
 make stress           // complie demo stress-test.cpp
