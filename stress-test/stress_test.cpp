@@ -15,16 +15,16 @@
 
 #define NUM_THREADS 1
 #define TEST_COUNT 100000
-SkipList<int, std::string> skipList(18);
+SkipList<int, std::string> skipList(18);   // 最大18层
 
 void *insertElement(void* threadid) {
     long tid; 
     tid = (long)threadid;
     std::cout << tid << std::endl;  
-    int tmp = TEST_COUNT/NUM_THREADS; 
+    int tmp = TEST_COUNT/NUM_THREADS;   //每个线程执行 插入的数据个数
 	for (int i=tid*tmp, count=0; count<tmp; i++) {
         count++;
-		skipList.insert_element(rand() % TEST_COUNT, "a"); 
+		skipList.insert_element(rand() % TEST_COUNT, "a");  // 随机生成 key 插入
 	}
     pthread_exit(NULL);
 }
@@ -33,7 +33,7 @@ void *getElement(void* threadid) {
     long tid; 
     tid = (long)threadid;
     std::cout << tid << std::endl;  
-    int tmp = TEST_COUNT/NUM_THREADS; 
+    int tmp = TEST_COUNT/NUM_THREADS;  
 	for (int i=tid*tmp, count=0; count<tmp; i++) {
         count++;
 		skipList.search_element(rand() % TEST_COUNT); 
@@ -52,11 +52,11 @@ int main() {
         auto start = std::chrono::high_resolution_clock::now();
 
         for( i = 0; i < NUM_THREADS; i++ ) {
-            std::cout << "main() : creating thread, " << i << std::endl;
+            std::cout << RED("[          main() : creating thread,     ]") << i << std::endl;
             rc = pthread_create(&threads[i], NULL, insertElement, (void *)i);
 
             if (rc) {
-                std::cout << "Error:unable to create thread," << rc << std::endl;
+                std::cout << RED("Error:unable to create thread,") << rc << std::endl;
                 exit(-1);
             }
         }
@@ -70,7 +70,7 @@ int main() {
         }
         auto finish = std::chrono::high_resolution_clock::now(); 
         std::chrono::duration<double> elapsed = finish - start;
-        std::cout << "insert elapsed:" << elapsed.count() << std::endl;
+        std::cout << RED("insert elapsed:") << elapsed.count() << std::endl;
     }
     // skipList.displayList();
 

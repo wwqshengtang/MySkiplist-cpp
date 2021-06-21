@@ -22,7 +22,7 @@ int main() {
 	skipList.insert_element("19", "yang"); 
 	skipList.insert_element("19", "yanuuuuuuuuuuuuuuuuuug"); 
 
-    std::cout << "skipList size:" << skipList.size() << std::endl;
+    std::cout << GREEN("skipList size:") << skipList.size() << std::endl;
 
     skipList.dump_file();
 
